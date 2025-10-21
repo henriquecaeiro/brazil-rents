@@ -1,0 +1,8 @@
+.card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: .75rem;
+  padding: 1rem;
+}
+.header { margin-bottom: .5rem; }
+.footer { margin-top: .75rem; color: var(--muted); }

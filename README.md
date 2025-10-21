@@ -1,16 +1,45 @@
-# React + Vite
+# React + Vite (JS) — Feature-first Starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal, enterprise-friendly scaffold for React + Vite (JavaScript) using **feature-first** organization.
+- Routing with React Router and **code-splitting** via `React.lazy`.
+- Global **ThemeContext** example (light/dark).
+- `shared/` for reusable components, hooks, utils, services, constants and styles.
+- Example **feature**: `posts` consuming an API (default: JSONPlaceholder).
+- Alias `@` → `src` for clean imports.
+- Environment variables via `import.meta.env` (Vite).
 
-Currently, two official plugins are available:
+## Quick start
+```bash
+npm install
+npm run dev
+# open the printed URL
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Env
+Copy `.env.example` to `.env` and adjust:
+```
+VITE_API_URL=https://jsonplaceholder.typicode.com
+```
 
-## React Compiler
+> Only variables prefixed with `VITE_` are exposed to the client by Vite.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Scripts
+- `npm run dev` — Start dev server
+- `npm run build` — Build for production
+- `npm run preview` — Preview the production build locally
+- `npm run lint` — Run ESLint
 
-## Expanding the ESLint configuration
+## Structure (excerpt)
+```
+src/
+  app/              # App shell and routes
+  contexts/         # React contexts (global state/providers)
+  features/         # Feature (domain) folders
+  layouts/          # App layouts (header/nav/footer wrappers)
+  pages/            # Global pages (Home, About, 404...)
+  shared/           # Reusable stuff: components, hooks, services, utils, etc.
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+**Enjoy!** This is a starting point—prune or expand as your app grows.

@@ -1,0 +1,35 @@
+/* Design tokens (user palette). Update hex codes as needed. */
+:root {
+  /* Core palette */
+  --background-dark: #0e1a1a; /* Background Dark */
+  --background-light: #f5f7f7; /* Background Light */
+  --primary: #122022; /* Primary */
+  --secondary: #ffffff; /* Secondary (light surface) */
+  --border-dark: #203234; /* Border Dark */
+  --border-light: #e4e7ec; /* Border Light */
+  --brand: #0e7490; /* Brand */
+  --accent: #e6b422; /* Accent */
+  --success: #10b981; /* Success */
+  --warning: #f59e0b; /* Warning */
+  --danger: #dc2626; /* Danger */
+
+  /* Semantic tokens (dark theme by default) */
+  --bg: var(--background-dark);
+  --fg: var(--background-light);
+  --muted: #9fb1b7;
+  --surface: #0f1f22;
+  --border: var(--border-dark);
+  --link: var(--brand);
+  --link-hover: var(--accent);
+}
+
+/* Light theme override */
+[data-theme='light'] {
+  --bg: var(--background-light);
+  --fg: var(--background-dark);
+  --muted: #475569;
+  --surface: var(--secondary);
+  --border: var(--border-light);
+  --link: var(--brand);
+  --link-hover: var(--accent);
+}

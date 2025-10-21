@@ -1,0 +1,95 @@
+/* Load Roboto Serif (weights: 400 Regular, 600 SemiBold, 700 Bold) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,400;600;700&display=swap');
+
+/* Minimal reset & base */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+html {
+  font-size: 16px;
+} /* keep base for rem scaling */
+
+:root {
+  /* Typography tokens */
+  --font-family: 'Roboto Serif', ui-serif, Georgia, 'Times New Roman', Times, serif;
+  --font-title: 38px; /* Title - Bold 38 */
+  --font-subtitle: 24px; /* Subtitle - SemiBold 24 */
+  --font-paragraph: 16px; /* Paragraph - Regular 16 */
+
+  /* Spacing tokens */
+  --radius: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text defaults mapped to your requested sizes */
+h1,
+.text-title {
+  font-size: var(--font-title);
+  line-height: 1.25;
+  font-weight: 700; /* Bold */
+  margin: 0 0 0.5rem;
+}
+
+h2,
+.text-subtitle {
+  font-size: var(--font-subtitle);
+  line-height: 1.35;
+  font-weight: 600; /* SemiBold */
+  margin: 0 0 0.5rem;
+}
+
+p,
+.text-paragraph {
+  font-size: var(--font-paragraph);
+  line-height: 1.6;
+  font-weight: 400; /* Regular */
+  margin: 0 0 1rem;
+}
+
+/* Links */
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Common layout helpers (optional) */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.nav {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.link {
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+}
+.link.active {
+  background: var(--surface);
+}
+
+/* Code surface */
+code {
+  background: var(--surface);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
