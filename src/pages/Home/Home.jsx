@@ -3,29 +3,40 @@ import Card from '@/shared/components/Card/Card'
 import Button from '@/shared/components/Button/Button'
 import { Link } from 'react-router-dom'
 import styles from './Home.module.css'
+import Input from '@/shared/components/Input/Input'
 
 export default function Home() {
   return (
-    <div className={styles.grid}>
-      <Card title="Welcome">
+    <div className="container">
+      <div className={styles.homeTitleContainer}>
+        <h1>Encontre o Valor de Alugel em São Paulo</h1>
+        <p>Compare e estime o preço justo para o seu alugel</p>
+      </div>
+
+      <div className={`${styles.homeButtonsContainer} container`}>
+        <Button className="buttonPrimary buttonLg">Pesquisa Individual</Button>
+
+        <Button className="buttonSecondary buttonLg">Pesquisa Individual</Button>
+      </div>
+
+      <div className={`${styles.homeFormContainer} container`}>
+        <Input placehoder={'Nome'} />
+        <Button className="buttonForm">Pesquisar</Button>
+      </div>
+
+      {/*       <Card title="Welcome">
         <p>
           This is a minimal React + Vite starter using a <strong>feature-first</strong> structure.
-          Explore the <code>shared/</code> folder for reusable pieces and the <code>features/</code> folder for domain-specific modules.
+          Explore the <code>shared/</code> folder for reusable pieces and the <code>features/</code>{' '}
+          folder for domain-specific modules.
         </p>
         <p>
           Try the demo <Link to="/posts">Posts</Link> page to see API calls in action.
         </p>
-        <Button as={Link} to="/posts">Explore Posts →</Button>
-      </Card>
-      <Card title="Where things live">
-        <ul>
-          <li><code>app/</code> — shell and routes</li>
-          <li><code>layouts/</code> — layout wrappers</li>
-          <li><code>pages/</code> — global pages (Home, About, 404)</li>
-          <li><code>features/</code> — domain folders (example: posts)</li>
-          <li><code>shared/</code> — reusable components, hooks, utils, services, styles</li>
-        </ul>
-      </Card>
+        <Button as={Link} to="/posts">
+          Explore Posts →
+        </Button>
+      </Card> */}
     </div>
   )
 }

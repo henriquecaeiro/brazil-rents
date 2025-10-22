@@ -13,18 +13,6 @@
   --warning: #f59e0b; /* Warning */
   --danger: #dc2626; /* Danger */
 
-  /* Semantic tokens (dark theme by default) */
-  --bg: var(--background-dark);
-  --fg: var(--background-light);
-  --muted: #9fb1b7;
-  --surface: #0f1f22;
-  --border: var(--border-dark);
-  --link: var(--brand);
-  --link-hover: var(--accent);
-}
-
-/* Light theme override */
-[data-theme='light'] {
   --bg: var(--background-light);
   --fg: var(--background-dark);
   --muted: #475569;

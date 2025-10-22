@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { ROUTES } from '@/shared/constants/routes.js'
-import { useTheme } from '@/contexts/ThemeContext.jsx'
 import styles from '@/layouts/MainLayout.module.css'
 import logo from '@/shared/assets/logo.png'
 
@@ -12,7 +11,7 @@ export default function MainLayout({ children }) {
         <div className={`${styles.topbar}`}>
           <Link to={ROUTES.HOME} className={styles.brand}>
             <img src={logo} alt="Logo" width="42" height="42" />
-            <strong>React + Vite Starter</strong>
+            <strong>Estimativa SP</strong>
           </Link>
 
           <nav className={`nav ${styles.navRight}`}>
@@ -20,19 +19,19 @@ export default function MainLayout({ children }) {
               className={({ isActive }) => `link ${isActive ? 'active' : ''}`}
               to={ROUTES.HOME}
             >
-              Home
+              <strong>Home</strong>
             </NavLink>
             <NavLink
               className={({ isActive }) => `link ${isActive ? 'active' : ''}`}
               to={ROUTES.POSTS}
             >
-              Posts
+              <strong>Posts</strong>
             </NavLink>
             <NavLink
               className={({ isActive }) => `link ${isActive ? 'active' : ''}`}
               to={ROUTES.ABOUT}
             >
-              About
+              <strong>About</strong>
             </NavLink>
           </nav>
         </div>

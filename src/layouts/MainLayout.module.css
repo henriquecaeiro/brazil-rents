@@ -20,6 +20,10 @@
   gap: 0.5rem;
 }
 
+.brand:hover {
+  color: var(--link) !important;
+}
+
 .navRight {
   margin-left: auto;
 }
