@@ -1,0 +1,13 @@
+.aboutContainer {
+  height: calc(100vh - var(--navbar-h)) !important;
+  align-items: center;
+}
+
+.repositoriosBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  height: 100%;
+}

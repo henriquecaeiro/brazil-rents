@@ -20,9 +20,8 @@ html {
   --font-title: 38px; /* Title - Bold 38 */
   --font-subtitle: 24px; /* Subtitle - SemiBold 24 */
   --font-paragraph: 16px; /* Paragraph - Regular 16 */
-
-  /* Spacing tokens */
   --radius: 12px;
+  --navbar-h: 138px;
 }
 
 body {
@@ -86,6 +85,19 @@ a:hover {
 }
 .link.active {
   background: var(--surface);
+}
+
+/* Chrome, Safari, Edge (Chromium), Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* padrão moderno */
 }
 
 /* Code surface */

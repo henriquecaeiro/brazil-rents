@@ -1,8 +1,18 @@
 .input {
-  width: 356px;
   height: 64px;
   border-radius: 8px;
   border: 2px solid var(--border-dark);
   background: var(--background-light);
   padding: 0 20px;
+}
+
+.textArea {
+  height: 160px;
+  min-height: 160px; /* garante que não fique menor */
+  max-height: 160px; /* trava em 160px */
+  resize: none; /* impede o usuário de redimensionar */
+}
+
+.inputLight {
+  background-color: var(--secondary) !important;
 }
