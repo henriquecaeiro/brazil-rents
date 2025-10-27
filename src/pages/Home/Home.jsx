@@ -1,12 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '@/shared/components/Card/Card'
 import Button from '@/shared/components/Button/Button'
 import styles from './Home.module.css'
 import Input from '@/shared/components/Input/Input'
 import usePredict from '@/features/predict/hooks/usePredict'
+import { useLoading } from '@/contexts/LoadingContext'
+import load from '@/shared/assets/load.gif'
+import search from '@/shared/assets/search.png'
+import { toast } from 'react-toastify'
 
 export default function Home() {
   const { submit } = usePredict()
+  const { loading } = useLoading()
+  const [cardTitle, setCardTitle] = useState(null)
+  const [canSubmit, setCanSubmit] = useState(true)
+
+  useEffect(() => {
+    const unsubscribe = toast.onChange(({ status, type }) => {
+      if (type === 'warning') {
+        setCanSubmit((prev) => (status === 'added' ? false : status === 'removed' ? true : prev))
+      }
+    })
+
+    return () => {
+      // em vez de toast.offChange(...):
+      unsubscribe()
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(canSubmit)
+  }, [canSubmit])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const elements = new FormData(e.currentTarget)
+    const values = Object.fromEntries(elements.entries())
+
+    const hasEmpty = Object.values(values).some((v) => String(v).trim() === '')
+
+    if (hasEmpty) {
+      toast.warn('preencha todos os campos')
+      return
+    }
+
+    return submit(e)
+  }
 
   return (
     <div className="container-fluid">
@@ -32,7 +72,7 @@ export default function Home() {
       <div className="row gx-3 justify-content-between">
         <div className="col-12 col-lg-6">
           {/* Form vira a .row para manter o g-3 (gutter) */}
-          <form onSubmit={submit} className={`row g-3 ${styles.homeFormContainer}`}>
+          <form onSubmit={handleSubmit} className={`row g-3 ${styles.homeFormContainer}`}>
             <div className="col-12 col-lg-6">
               <Input
                 id="area-input"
@@ -86,13 +126,31 @@ export default function Home() {
 
         {/* Coluna do card de resultado */}
         <div className="col-12 col-lg-6 col-xl-4 mt-4 mt-lg-0">
-          <Card title="Jardim Adriana">
-            <p>Rua Floro de oliveira</p>
-            <h1 className={styles.priceTitle}>R$ 4.500,00</h1>
-            <p>Área: 125 m²</p>
-            <p>Quartos: 2</p>
-            <p>Garagem: 3</p>
-            <p>Tipo: Apartamento</p>
+          <Card
+            title={cardTitle == null ? 'Aguardando sua Pesquisa' : cardTitle}
+            center={cardTitle == null ? true : false}
+          >
+            {loading ? (
+              <div className={styles.cardContainer}>
+                <img src={load} alt="loading" className={styles.load} />
+              </div>
+            ) : !loading && cardTitle === null ? (
+              <div className={styles.cardContainer}>
+                <p className={styles.priceTitle}>
+                  Preencha os campos ao lado para estimar o valor do aluguel.
+                </p>
+                <img src={search} alt="search" className={styles.search} />
+              </div>
+            ) : (
+              <>
+                <p>Rua Floro de oliveira</p>
+                <h1 className={styles.priceTitle}>R$ 4.500,00</h1>
+                <p>Área: 125 m²</p>
+                <p>Quartos: 2</p>
+                <p>Garagem: 3</p>
+                <p>Tipo: Apartamento</p>
+              </>
+            )}
           </Card>
         </div>
       </div>

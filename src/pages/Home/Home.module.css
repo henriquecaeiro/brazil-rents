@@ -20,6 +20,19 @@
   color: var(--brand);
 }
 
+.cardContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  height: 200px;
+  width: 200px;
+}
+
 @media (max-width: 991.98px) {
   .homeTitleContainer {
     margin-top: 24px;

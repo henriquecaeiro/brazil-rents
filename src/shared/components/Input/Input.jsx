@@ -5,16 +5,14 @@ export default function Input({
   type = 'text',
   placeholder = '',
   id,
-  textarea = false, // when true, render <textarea>
-  className = '', // ex.: "textArea outline" (classes do MESMO module)
+  textarea = false,
+  className = '',
   rows = 3,
   style,
   ...props
 }) {
   const Comp = textarea ? 'textarea' : 'input'
 
-  // Transforma "textArea outline" -> [styles.textArea, styles.outline]
-  // Se a classe não existir no module, mantém o nome (para classes globais)
   const mapped = String(className)
     .split(/\s+/)
     .filter(Boolean)
@@ -25,10 +23,10 @@ export default function Input({
   return (
     <Comp
       id={id}
-      {...(!textarea ? { type } : {})} // "type" só para <input>
+      {...(!textarea ? { type } : {})}
       placeholder={placeholder}
       className={cls}
-      {...(textarea ? { rows } : {})} // "rows" só para <textarea>
+      {...(textarea ? { rows } : {})}
       style={style}
       {...props}
     />

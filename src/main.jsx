@@ -6,12 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@/shared/styles/globals.css'
 import '@/shared/styles/theme.css'
+import { AppProviders } from './providers/AppProviders'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* App-level providers */}
     <BrowserRouter>
-      <App />
+      <AppProviders>
+        <App />
+      </AppProviders>
     </BrowserRouter>
   </React.StrictMode>,
 )
