@@ -11,7 +11,9 @@ export const storage = {
   set(key, value) {
     try {
       localStorage.setItem(key, JSON.stringify(value))
-    } catch {}
+    } catch {
+      console.error("Local Storage Error");
+    }
   },
   remove(key) {
     localStorage.removeItem(key)

@@ -8,11 +8,15 @@ import { useLoading } from '@/contexts/LoadingContext'
 import load from '@/shared/assets/load.gif'
 import search from '@/shared/assets/search.png'
 import { toast } from 'react-toastify'
+import useRent from '@/features/rent/hooks/useRent'
+import Select from '@/shared/components/Select/Select'
 
 export default function Home() {
-  const { submit } = usePredict()
+  const { submit, result } = usePredict()
+  const { data } = useRent()
   const { loading } = useLoading()
-  const [cardTitle, setCardTitle] = useState(null)
+  const [initializing, setInitializing] = useState(true)
+  const [fetching, setFetching] = useState(false)
   const [canSubmit, setCanSubmit] = useState(true)
 
   useEffect(() => {
@@ -23,18 +27,31 @@ export default function Home() {
     })
 
     return () => {
-      // em vez de toast.offChange(...):
       unsubscribe()
     }
   }, [])
 
   useEffect(() => {
-    console.log(canSubmit)
-  }, [canSubmit])
+    if (loading) {
+      setFetching(true)
+    }
+
+    if (!loading && fetching) {
+      setInitializing(false)
+    }
+  }, [loading, fetching])
+
+  useEffect(() => {
+    if (loading) {
+      setCanSubmit(false)
+    } else {
+      setCanSubmit(true)
+    }
+  }, [loading])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    if (!canSubmit) return
     const elements = new FormData(e.currentTarget)
     const values = Object.fromEntries(elements.entries())
 
@@ -48,31 +65,27 @@ export default function Home() {
     return submit(e)
   }
 
+  if (initializing) {
+    return (
+      <div className={styles.loadContainer}>
+        <img src={load} alt="loading" className={styles.load} />
+      </div>
+    )
+  }
+
   return (
-    <div className="container-fluid">
+    <div className={'container-fluid'}>
       {/* Título */}
       <div className={styles.homeTitleContainer}>
         <h1>Encontre o Valor de Alugel em São Paulo</h1>
         <p>Compare e estime o preço justo para o seu alugel</p>
       </div>
 
-      {/* Botões */}
-      <div className={styles.homeButtonsContainer}>
-        <div className="row g-3 justify-content-between justify-content-lg-center w-100">
-          <div className="col-12 col-lg-6 col-xl-3">
-            <Button className="buttonPrimary buttonLg w-100">Pesquisa Individual</Button>
-          </div>
-          <div className="col-12 col-lg-6 col-xl-3">
-            <Button className="buttonSecondary buttonLg w-100">Pesquisa Individual</Button>
-          </div>
-        </div>
-      </div>
-
       {/* Grid principal */}
       <div className="row gx-3 justify-content-between">
-        <div className="col-12 col-lg-6">
+        <div className="col-12 col-lg-6 row gap-5">
           {/* Form vira a .row para manter o g-3 (gutter) */}
-          <form onSubmit={handleSubmit} className={`row g-3 ${styles.homeFormContainer}`}>
+          <form onSubmit={handleSubmit} className={`col-12 row g-3 ${styles.homeFormContainer}`}>
             <div className="col-12 col-lg-6">
               <Input
                 id="area-input"
@@ -104,20 +117,23 @@ export default function Home() {
             </div>
 
             <div className="col-12 col-lg-6">
-              <Input id="endereco-input" name="endereco" placeholder="Endereço" className="w-100" />
+              <Select data={data?.addresses} name="endereco" placeholder="Selecione um endereço" />
             </div>
 
             <div className="col-12 col-lg-6">
-              <Input id="distrito-input" name="distrito" placeholder="Distrito" className="w-100" />
+              <Select data={data?.districts} name="distrito" placeholder="Selecione um distrito" />
             </div>
 
             <div className="col-12 col-lg-6">
-              <Input id="tipo-input" name="tipo" placeholder="Tipo do imóvel" className="w-100" />
+              <Select data={data?.types} name="tipo" placeholder="Selecione um tipo de imóvel" />
             </div>
 
             {/* Botão ocupa a linha toda */}
             <div className="col-12">
-              <Button type="submit" className="buttonForm w-100">
+              <Button
+                type="submit"
+                className={`w-100 ${canSubmit ? 'buttonForm' : 'buttonDisabled'}`}
+              >
                 Pesquisar
               </Button>
             </div>
@@ -127,14 +143,14 @@ export default function Home() {
         {/* Coluna do card de resultado */}
         <div className="col-12 col-lg-6 col-xl-4 mt-4 mt-lg-0">
           <Card
-            title={cardTitle == null ? 'Aguardando sua Pesquisa' : cardTitle}
-            center={cardTitle == null ? true : false}
+            title={result?.district == undefined ? 'Aguardando sua Pesquisa' : result?.district}
+            center={result?.district == undefined ? true : false}
           >
             {loading ? (
               <div className={styles.cardContainer}>
                 <img src={load} alt="loading" className={styles.load} />
               </div>
-            ) : !loading && cardTitle === null ? (
+            ) : !loading && result?.district === undefined ? (
               <div className={styles.cardContainer}>
                 <p className={styles.priceTitle}>
                   Preencha os campos ao lado para estimar o valor do aluguel.
@@ -143,12 +159,12 @@ export default function Home() {
               </div>
             ) : (
               <>
-                <p>Rua Floro de oliveira</p>
-                <h1 className={styles.priceTitle}>R$ 4.500,00</h1>
-                <p>Área: 125 m²</p>
-                <p>Quartos: 2</p>
-                <p>Garagem: 3</p>
-                <p>Tipo: Apartamento</p>
+                <p>{result.address}</p>
+                <h1 className={styles.priceTitle}>R$ {result.value}</h1>
+                <p>Área: {result.area} m²</p>
+                <p>Quartos: {result.bedrooms}</p>
+                <p>Garagem: {result.garage}</p>
+                <p>Tipo: {result.type}</p>
               </>
             )}
           </Card>

@@ -20,6 +20,15 @@
   color: var(--brand);
 }
 
+.loadContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--navbar-h));
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .cardContainer {
   display: flex;
   width: 100%;

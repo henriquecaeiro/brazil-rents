@@ -36,6 +36,13 @@
   border: 1px solid var(--brand);
 }
 
+.buttonDisabled {
+  background-color: var(--brand-light) !important;
+  color: var(--primary);
+  border: 1px solid var(--brand-light);
+  cursor: not-allowed !important;
+}
+
 .buttonSm {
   min-width: 64px;
 }

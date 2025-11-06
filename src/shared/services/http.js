@@ -1,7 +1,7 @@
 // Axios instance: baseURL from env (Vite) with sane fallback.
 import axios from 'axios'
 
-const baseURL = import.meta.env.VITE_API_URL || 'https://jsonplaceholder.typicode.com'
+const baseURL = import.meta.env.VITE_API_URL
 
 const http = axios.create({ baseURL })
 

@@ -22,8 +22,7 @@ export default function usePredict() {
 
     predict(payload)
     .then((data) => {
-      console.log(data)
-      payload.value = data.value ?? data ?? null
+      payload.value = data.value
       setResult(payload)
     })
     .catch((err) => console.error(err))
