@@ -1,7 +1,12 @@
-import React from 'react'
-import Card from '@/shared/components/Card/Card'
-import styles from '@/pages/About/About.module.css'
+import React from 'react';
+import Card from '@/shared/components/Card/Card';
+import styles from '@/pages/About/About.module.css';
 
+/**
+ * The About page, which provides information about the project.
+ *
+ * @returns {JSX.Element} The rendered About page.
+ */
 export default function About() {
   return (
     <div className={`container-fluid row ${styles.aboutContainer} gy-3 gy-xl-0`}>
@@ -46,5 +51,5 @@ export default function About() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

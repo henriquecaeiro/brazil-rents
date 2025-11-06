@@ -1,76 +1,91 @@
-import React, { useEffect, useState } from 'react'
-import Card from '@/shared/components/Card/Card'
-import Button from '@/shared/components/Button/Button'
-import styles from './Home.module.css'
-import Input from '@/shared/components/Input/Input'
-import usePredict from '@/features/predict/hooks/usePredict'
-import { useLoading } from '@/contexts/LoadingContext'
-import load from '@/shared/assets/load.gif'
-import search from '@/shared/assets/search.png'
-import { toast } from 'react-toastify'
-import useRent from '@/features/rent/hooks/useRent'
-import Select from '@/shared/components/Select/Select'
+import React, { useEffect, useState } from 'react';
+import Card from '@/shared/components/Card/Card';
+import Button from '@/shared/components/Button/Button';
+import styles from './Home.module.css';
+import Input from '@/shared/components/Input/Input';
+import usePredict from '@/features/predict/hooks/usePredict';
+import { useLoading } from '@/contexts/LoadingContext';
+import load from '@/shared/assets/load.gif';
+import search from '@/shared/assets/search.png';
+import { toast } from 'react-toastify';
+import useRent from '@/features/rent/hooks/useRent';
+import Select from '@/shared/components/Select/Select';
 
+/**
+ * The Home page component, which allows users to predict rent values based on property features.
+ * It handles form submission, displays loading states, and shows the prediction result.
+ *
+ * @returns {JSX.Element} The rendered Home page.
+ */
 export default function Home() {
-  const { submit, result } = usePredict()
-  const { data } = useRent()
-  const { loading } = useLoading()
-  const [initializing, setInitializing] = useState(true)
-  const [fetching, setFetching] = useState(false)
-  const [canSubmit, setCanSubmit] = useState(true)
+  const { submit, result } = usePredict();
+  const { data } = useRent();
+  const { loading } = useLoading();
+  const [initializing, setInitializing] = useState(true);
+  const [fetching, setFetching] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(true);
 
+  // Effect to manage form submission state based on toast notifications.
+  // This prevents users from re-submitting while a warning toast is active.
   useEffect(() => {
     const unsubscribe = toast.onChange(({ status, type }) => {
       if (type === 'warning') {
-        setCanSubmit((prev) => (status === 'added' ? false : status === 'removed' ? true : prev))
+        setCanSubmit(status !== 'added');
       }
-    })
+    });
 
     return () => {
-      unsubscribe()
-    }
-  }, [])
+      unsubscribe();
+    };
+  }, []);
 
+  // Effect to handle the initial loading screen logic.
   useEffect(() => {
     if (loading) {
-      setFetching(true)
+      setFetching(true);
     }
 
     if (!loading && fetching) {
-      setInitializing(false)
+      setInitializing(false);
     }
-  }, [loading, fetching])
+  }, [loading, fetching]);
 
+  // Effect to disable the submit button during any loading state.
   useEffect(() => {
     if (loading) {
-      setCanSubmit(false)
+      setCanSubmit(false);
     } else {
-      setCanSubmit(true)
+      setCanSubmit(true);
     }
-  }, [loading])
+  }, [loading]);
 
+  /**
+   * Handles the form submission, validates inputs, and calls the prediction service.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   */
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!canSubmit) return
-    const elements = new FormData(e.currentTarget)
-    const values = Object.fromEntries(elements.entries())
+    e.preventDefault();
+    if (!canSubmit) return;
+    const elements = new FormData(e.currentTarget);
+    const values = Object.fromEntries(elements.entries());
 
-    const hasEmpty = Object.values(values).some((v) => String(v).trim() === '')
+    const hasEmpty = Object.values(values).some((v) => String(v).trim() === '');
 
     if (hasEmpty) {
-      toast.warn('preencha todos os campos')
-      return
+      toast.warn('preencha todos os campos');
+      return;
     }
 
-    return submit(e)
-  }
+    return submit(e);
+  };
 
+  // Shows a full-screen loader on the first visit.
   if (initializing) {
     return (
       <div className={styles.loadContainer}>
         <img src={load} alt="loading" className={styles.load} />
       </div>
-    )
+    );
   }
 
   return (
@@ -171,5 +186,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-  )
+  );
 }

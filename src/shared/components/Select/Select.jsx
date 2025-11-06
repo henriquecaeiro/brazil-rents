@@ -1,64 +1,85 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styles from './Select.module.css'
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import styles from './Select.module.css';
 
+/**
+ * A custom select component with autocomplete/filtering functionality.
+ * It behaves like a datalist-enabled input.
+ *
+ * @typedef {object} SelectProps
+ * @property {string[]} [data=null] - The array of string options to display.
+ * @property {string} name - The name of the input, used for form submission.
+ * @property {string} [placeholder='Selecione um valor'] - The placeholder text for the input.
+ */
+
+/**
+ * @param {SelectProps} props
+ * @returns {JSX.Element} The rendered custom select component.
+ */
 export default function Select({ data = null, name, placeholder = 'Selecione um valor' }) {
-  // Controlled input value (vai pro FormData)
-  const [value, setValue] = useState('')
+  // The controlled value of the input, which is sent with the form.
+  const [value, setValue] = useState('');
 
-  // Options currently visíveis no dropdown
-  const [options, setOptions] = useState(data || [])
+  // The options currently visible in the dropdown.
+  const [options, setOptions] = useState(data || []);
 
-  // Controla se o dropdown tá aberto
-  const [isOpen, setIsOpen] = useState(false)
+  // Controls whether the dropdown is open or closed.
+  const [isOpen, setIsOpen] = useState(false);
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   function handleFocus() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function handleBlur() {
-    // pequeno delay pra permitir o onMouseDown das opções
+    // A small delay is used to allow the `onMouseDown` event on the options to fire before the dropdown closes.
+    // Using `onMouseDown` instead of `onClick` for this reason.
     setTimeout(() => {
-      setIsOpen(false)
-    }, 0)
+      setIsOpen(false);
+    }, 150); // 150ms delay to ensure click is registered.
   }
 
   function handleChange(e) {
-    setValue(e.target.value)
+    setValue(e.target.value);
   }
 
-  // sempre que "data" mudar (por exemplo vindo do hook async),
-  // sincroniza options iniciais
+  // When the `data` prop changes (e.g., after an async fetch),
+  // this effect synchronizes the initial options.
   useEffect(() => {
-    setOptions(data || [])
-  }, [data])
+    setOptions(data || []);
+  }, [data]);
 
-  // filtra baseado no valor digitado SEM destruir a lista original
+  // This effect filters the displayed options based on the user's input
+  // without modifying the original `data` array.
   useEffect(() => {
     if (!data) {
-      setOptions([])
-      return
+      setOptions([]);
+      return;
     }
 
-    const needle = value.toLowerCase().trim()
+    const needle = value.toLowerCase().trim();
 
     if (needle === '') {
-      // input vazio -> mostra tudo
-      setOptions(data)
+      // If the input is empty, show all options.
+      setOptions(data);
     } else {
-      // filtra ignorando maiúsculas/minúsculas
-      const filtered = data.filter((o) => String(o).toLowerCase().includes(needle))
-      setOptions(filtered)
+      // Filter options, ignoring case.
+      const filtered = data.filter((o) => String(o).toLowerCase().includes(needle));
+      setOptions(filtered);
     }
-  }, [value, data])
+  }, [value, data]);
 
+  /**
+   * Handles the selection of an option from the dropdown.
+   * @param {string} optionValue - The value of the selected option.
+   */
   function handleSelectOption(optionValue) {
-    setValue(optionValue)
+    setValue(optionValue);
 
-    // mantém foco no input após escolher
+    // Keep the input focused after an option is selected to allow for quick changes.
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
   }
 
@@ -90,5 +111,11 @@ export default function Select({ data = null, name, placeholder = 'Selecione um 
         )}
       </div>
     </div>
-  )
+  );
 }
+
+Select.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.string),
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+};

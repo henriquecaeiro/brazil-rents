@@ -1,12 +1,28 @@
-import React from 'react'
-import Card from '@/shared/components/Card/Card'
-import Button from '@/shared/components/Button/Button'
-import { FaGithub, FaLinkedin, FaWhatsapp, FaPhone, FaLocationDot } from 'react-icons/fa6'
-import styles from '@/pages/Contact/Contact.module.css'
-import { MdEmail } from 'react-icons/md'
-import Input from '@/shared/components/Input/Input'
+import React from 'react';
+import Card from '@/shared/components/Card/Card';
+import Button from '@/shared/components/Button/Button';
+import { FaGithub, FaLinkedin, FaWhatsapp, FaPhone, FaLocationDot } from 'react-icons/fa6';
+import styles from '@/pages/Contact/Contact.module.css';
+import { MdEmail } from 'react-icons/md';
+import Input from '@/shared/components/Input/Input';
 
+/**
+ * The Contact page, displaying contact information and a contact form.
+ *
+ * @returns {JSX.Element} The rendered Contact page.
+ */
 export default function Contact() {
+  /**
+   * Handles form submission.
+   * Note: This is a placeholder and does not send any data.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form event.
+   */
+  const handleSubmit = (e) => {
+    // TODO: Implement actual form submission logic (e.g., send an email).
+    e.preventDefault();
+    alert('O envio de formulário não está implementado.');
+  };
+
   return (
     <div className={`row ${styles.contactContainer}`}>
       <div className={`col-12 ${styles.contactTilte}`}>
@@ -93,7 +109,8 @@ export default function Contact() {
 
       <div className="col-12 col-xl-5 row mt-4 mt-xl-0">
         <Card title="Envie uma mensagem" center={true}>
-          <div className={`row gap-1 p-2`}>
+          {/* The form submission is currently a placeholder. */}
+          <form onSubmit={handleSubmit} className={`row gap-1 p-2`}>
             <Input id="nome-input" placeholder="Nome" className="inputLight" />
             <Input id="email-input" placeholder="Email" className="inputLight" />
             <Input id="telefone-input" placeholder="Telefone" className="inputLight" col={12} />
@@ -105,10 +122,10 @@ export default function Contact() {
               col={12}
               className="textArea inputLight"
             />
-            <Button className="buttonForm">Pesquisar</Button>
-          </div>
+            <Button type="submit" className="buttonForm">Enviar</Button>
+          </form>
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -1,9 +1,21 @@
-import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { ROUTES } from '@/shared/constants/routes.js'
-import styles from '@/layouts/MainLayout.module.css'
-import logo from '@/shared/assets/logo.png'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { NavLink, Link } from 'react-router-dom';
+import { ROUTES } from '@/shared/constants/routes.js';
+import styles from '@/layouts/MainLayout.module.css';
+import logo from '@/shared/assets/logo.png';
 
+/**
+ * The main layout for the application, including the header and main content area.
+ *
+ * @typedef {object} MainLayoutProps
+ * @property {React.ReactNode} children - The content to be rendered within the main layout.
+ */
+
+/**
+ * @param {MainLayoutProps} props
+ * @returns {JSX.Element} The rendered layout.
+ */
 export default function MainLayout({ children }) {
   return (
     <div className={styles.mainLayoutContainer}>
@@ -29,7 +41,7 @@ export default function MainLayout({ children }) {
               <span className="navbar-toggler-icon" />
             </button>
 
-            {/* Links colapsáveis */}
+            {/* Collapsible links */}
             <div className="collapse navbar-collapse" id="mainNavbar">
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
@@ -64,5 +76,9 @@ export default function MainLayout({ children }) {
 
       <main className={styles.mainLayoutContent}>{children}</main>
     </div>
-  )
+  );
 }
+
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
