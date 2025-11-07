@@ -1,0 +1,49 @@
+.homeTitleContainer {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.homeButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.homeFormContainer {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.priceTitle {
+  color: var(--brand);
+}
+
+.loadContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--navbar-h));
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  height: 200px;
+  width: 200px;
+}
+
+@media (max-width: 991.98px) {
+  .homeTitleContainer {
+    margin-top: 24px;
+  }
+}

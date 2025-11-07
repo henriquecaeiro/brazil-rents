@@ -1,0 +1,36 @@
+.contactTilte {
+  text-align: center;
+}
+
+.contactContainer {
+  padding: 0 25px;
+  justify-content: space-between;
+}
+
+.contactLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: var(--brand);
+  cursor: pointer;
+}
+
+.contactIconContainer {
+  background-color: var(--brand-light);
+  padding: 10px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.contactChannels p {
+  margin: 0;
+}
+
+.socialsLink {
+  color: var(--secondary);
+}
+
+.socialsIcon {
+  margin: 0px 10px;
+}
