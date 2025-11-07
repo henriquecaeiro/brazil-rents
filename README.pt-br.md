@@ -7,9 +7,8 @@ Uma aplicação React que estima preços de aluguel em São Paulo, Brasil, utili
 ## Status
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/henriquecaeiro/brazil-rents)
-![GitHub repo size](https://img.shields.io/github/repo-size/henriquecaeiro/brazil-rents)
-![GitHub license](https://img.shields.io/github/license/henriquecaeiro/brazil-rents)
 
+![GitHub repo size](https://img.shields.io/github/repo-size/henriquecaeiro/brazil-rents)
 ---
 
 ## Funcionalidades
@@ -135,32 +134,6 @@ A aplicação interage com os seguintes endpoints da API:
 -   **Linting:** ESLint com a configuração recomendada para React.
 -   **Formatação:** Prettier para um estilo de código consistente.
 -   **Arquitetura:** *Feature-first* para manter a lógica relacionada agrupada.
-
----
-
-## Testes
-
-TODO: Este projeto ainda não possui uma suíte de testes automatizados configurada.
-
----
-
-## Deploy
-
-TODO: O deploy para este projeto ainda não está configurado. Plataformas alvo podem incluir Vercel, Netlify ou um contêiner Docker.
-
----
-
-## Contribuição
-
-Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request.
-
-1.  Faça um fork do repositório.
-2.  Crie uma nova branch (`git checkout -b feature/SuaFeature`).
-3.  Faça commit das suas alterações (`git commit -m 'Adiciona alguma feature'`).
-4.  Envie para a branch (`git push origin feature/SuaFeature`).
-5.  Abra um Pull Request.
-
----
 
 ## Licença
 

@@ -7,8 +7,9 @@ A React application that estimates rent prices in São Paulo, Brazil, using a ma
 ## Status
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/henriquecaeiro/brazil-rents)
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/henriquecaeiro/brazil-rents)
-![GitHub license](https://img.shields.io/github/license/henriquecaeiro/brazil-rents)
+
 
 ---
 
@@ -135,30 +136,6 @@ The application interacts with the following API endpoints:
 -   **Linting:** ESLint with the recommended React configuration.
 -   **Formatting:** Prettier for consistent code style.
 -   **Architecture:** Feature-first to keep related logic together.
-
----
-
-## Testing
-
-TODO: This project does not yet have an automated test suite configured.
-
----
-
-## Deployment
-
-TODO: The deployment for this project is not yet configured. Target platforms could include Vercel, Netlify, or a Docker container.
-
----
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/YourFeature`).
-3.  Commit your changes (`git commit -m 'Add some feature'`).
-4.  Push to the branch (`git push origin feature/YourFeature`).
-5.  Open a Pull Request.
 
 ---
 
